@@ -10,8 +10,13 @@ const CustomLayout = props => {
       <Header>
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+          {
+            props.isAuthenticated ?
+              <Menu.Item key="2">Logout</Menu.Item>
+              :
+              <Menu.Item key="2"><Link to="/login">Login</Link></Menu.Item>
+          }
           <Menu.Item key="1"><Link to="/">Posts</Link></Menu.Item>
-          <Menu.Item key="2"><Link to="/login">Login</Link></Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>
