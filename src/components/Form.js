@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 const layout = {
   labelCol: {
@@ -22,16 +23,20 @@ const CustomForm = props => {
   const onFinish = (values) => {
     const title = values.title;
     const content = values.content;
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${props.token}`
+    }
     switch (props.requestType) {
       case 'post':
-        return axios.post('http://127.0.0.1:8000/api/', {
+        return axios.post('http://127.0.0.1:8000/api/create/', {
           title: title,
           content: content
         })
           .then(res => console.log(res))
           .catch(err => console.error(err));
       case 'put':
-        return axios.put(`http://127.0.0.1:8000/api/${props.articleID}/`, {
+        return axios.put(`http://127.0.0.1:8000/api/${props.articleID}/update/`, {
           title: title,
           content: content
         })
@@ -88,4 +93,11 @@ const CustomForm = props => {
     </Form>
   );
 };
-export default CustomForm;
+
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  };
+};
+
+export default connect(mapStateToProps)(CustomForm);

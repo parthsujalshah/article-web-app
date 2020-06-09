@@ -47,7 +47,7 @@ const RegistrationForm = props => {
             message: 'The input is not valid E-mail!',
           },
           {
-            required: true,
+            required: false,
             message: 'Please input your E-mail!',
           },
         ]}
