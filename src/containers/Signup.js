@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Form,
   Input,
-  Checkbox,
   Button,
 } from 'antd';
 import { connect } from 'react-redux';
